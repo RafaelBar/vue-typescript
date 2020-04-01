@@ -6,7 +6,6 @@
 
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator'
-  import stocks from '../../data/stocks'
   import Stock from './Stock.vue'
 
   @Component({
@@ -16,7 +15,14 @@
   })
   
   export default class Portfolio extends Vue {
-     stocks: any[] = stocks;
+        public stocks: any[] = []
+        mounted(){
+          this.stocks = this._stocks();
+        }
+        _stocks(){
+          console.log(this.$store.getters.dataStocks);
+          return this.$store.getters.dataStocks;
+        }
   }
 </script>
 

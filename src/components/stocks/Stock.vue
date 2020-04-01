@@ -4,7 +4,9 @@
             <div class="panel-heading"><strong>Name:</strong> {{stock.name}}</div>
             <div class="panel-body">
                 <div class="panel-content"><strong>Price:</strong> {{stock.price}} </div>
-                <button>Buy Stock</button>
+                 <input v-model="quantity" type="number" placeholder="Quantity" class="form-control">
+                <button @click="buyStock()">Buy Stock</button>
+                quantity: {{quantity}}
             </div>
         </div>
     </div>
@@ -15,7 +17,19 @@ import { Component, Vue, Prop } from 'vue-property-decorator'
 
 @Component
 export default class Stock extends Vue{
-    @Prop() readonly stock!: any[];
+    @Prop() readonly stock!: Stock;
+    order: any;
+    quantity: any = 0;
+    price: any;
+    id: any;
+    public buyStock() {
+        this.order = {
+            stockId: this.stock.id,
+            stockPrice: this.stock.price,
+            quantity: this.quantity
+        };
+        this.$store.dispatch('buyStock', this.order);
+    }  
 }
 </script>
 

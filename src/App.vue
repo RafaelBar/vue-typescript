@@ -8,18 +8,18 @@
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator'
   import Header from '@/components/Header.vue'
+  
 
   @Component({
     components: {
       'app-header': Header
-    },
-    created(){
-      this.$store.dispatch('initStocks');
     }
   })
   
   export default class App extends Vue {
-    
+      created(){
+            this.$store.dispatch('initStocks');
+      }
   }
 </script>
 
