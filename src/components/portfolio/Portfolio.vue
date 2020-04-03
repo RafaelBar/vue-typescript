@@ -17,12 +17,12 @@
   export default class Portfolio extends Vue {
         public stocks: any[] = []
         mounted(){
-          this.stocks = this._stocks();
+          this.stocks = this.$store.getters.stockPortfolio;
         }
-        _stocks(){
-          console.log(this.$store.getters.dataStocks);
-          return this.$store.getters.dataStocks;
-        }
+        // _stocks(){
+        //   console.log(this.$store.getters.stockPortfolio);
+        //   return this.$store.getters.stockPortfolio;
+        // }
   }
 </script>
 

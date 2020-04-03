@@ -22,11 +22,13 @@ export default class Stock extends Vue{
     quantity: any = 0;
     price: any;
     id: any;
+    name: any;
     public buyStock() {
         this.order = {
             stockId: this.stock.id,
             stockPrice: this.stock.price,
-            quantity: this.quantity
+            quantity: this.quantity,
+            name: this.stock.name
         };
         this.$store.dispatch('buyStock', this.order);
     }  

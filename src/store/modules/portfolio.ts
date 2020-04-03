@@ -7,6 +7,7 @@ class Portfolio extends VuexModule {
 
   @Mutation
   public 'BUY_STOCK' (order: any) {
+    debugger
       const record = this.stocks.find(element => element.id == order.stockId);
       if(record){
         order.quantity = parseInt(order.quantity);
@@ -16,13 +17,29 @@ class Portfolio extends VuexModule {
       else{
           this.stocks.push({
               id: order.stockId,
-              quantity: order.quantity
+              quantity: order.quantity,
+              price: order.stockPrice,
+              name: order.name
           })
       }
       this.funds -= order.stockPrice * order.quantity;
-      debugger
   }
   
-  
+  //Getters
+  get stockPortfolio(): any {
+          return this.stocks.map(stock => {
+              const record = this.stocks.find(element => element.id == stock.id);
+              return{
+                  id: record.id,
+                  quantity: record.quantity,
+                  name: record.name,
+                  price: record.price
+              }
+          });
+  }
+  get _funds(): any {
+    return this.funds
+  }
 }
+  
 export default Portfolio
