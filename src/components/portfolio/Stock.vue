@@ -4,7 +4,11 @@
             <div class="panel-heading"><strong>Name:</strong> {{stock.name}}</div>
             <div class="panel-body">
                 <div class="panel-content"><strong>Price:</strong> {{stock.price}} </div>
-                <button>Sell Stock</button>
+                <div class="panel-content"><strong>Quantity:</strong> {{stock.quantity}} </div>
+                <div class="">I want to sell: <input type="number" v-model="vSell"></div>
+                <button 
+                :disabled="(+stock.quantity < +vSell) || !(+vSell > 0)"
+                @click="sellStock">Sell Stock</button>
             </div>
         </div>
     </div>
@@ -15,7 +19,23 @@ import { Component, Vue, Prop } from 'vue-property-decorator'
 
 @Component
 export default class Stock extends Vue{
-    @Prop() readonly stock!: any[];
+    @Prop() readonly stock!: Stock;
+    id!: number;
+    name!: string;
+    price!: number;
+    vSell = 0;
+
+    public sellStock() {
+        const order = {
+            id: this.stock.id,
+            name: this.stock.name,
+            price: this.stock.price,
+            quantity: this.vSell
+
+        }
+        this.$store.dispatch('sellStock', order)
+    }
+
 }
 </script>
 
@@ -47,6 +67,10 @@ export default class Stock extends Vue{
                 color:white;
                 font-size: 16px;
                 cursor: pointer;
+                &:disabled{
+                    opacity: 0.3;
+                    cursor: not-allowed;
+                }
             }
         }
     }

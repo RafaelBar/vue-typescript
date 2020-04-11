@@ -1,6 +1,7 @@
 <template>
     <div class="panel-container">
         <app-stock :stock="stock" v-for="(stock, index) in stocks()" :key="index">{{stock.name}}</app-stock> 
+        <div v-if="+stocks.length < 1" class="">No Stocks to Buy</div>
     </div>
 </template>
 

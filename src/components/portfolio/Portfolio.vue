@@ -1,6 +1,7 @@
 <template>
     <div class="panel-container">
         <app-stock :stock="stock" v-for="(stock, index) in stocks" :key="index">{{stock.name}}</app-stock> 
+        <div v-if="+stocks.length < 1" class="">No Stocks to Sell</div>
     </div>
 </template>
 
@@ -15,9 +16,8 @@
   })
   
   export default class Portfolio extends Vue {
-        public stocks: any[] = []
-        mounted(){
-          this.stocks = this.$store.getters.stockPortfolio;
+        get stocks(){
+          return this.$store.getters.stockPortfolio;
         }
         // _stocks(){
         //   console.log(this.$store.getters.stockPortfolio);

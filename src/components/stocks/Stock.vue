@@ -5,7 +5,7 @@
             <div class="panel-body">
                 <div class="panel-content"><strong>Price:</strong> {{stock.price}} </div>
                  <input v-model="quantity" type="number" placeholder="Quantity" class="form-control">
-                <button @click="buyStock()">Buy Stock</button>
+                <button :disabled="+_funds < (+quantity * +stock.price)" @click="buyStock()">Buy Stock</button>
                 quantity: {{quantity}}
             </div>
         </div>
@@ -32,6 +32,9 @@ export default class Stock extends Vue{
         };
         this.$store.dispatch('buyStock', this.order);
     }  
+    get _funds(){
+        return this.$store.getters._funds;
+    }
 }
 </script>
 
@@ -63,6 +66,10 @@ export default class Stock extends Vue{
                 color:white;
                 font-size: 16px;
                 cursor: pointer;
+                &:disabled{
+                    opacity: 0.3;
+                    cursor: not-allowed;
+                }
             }
         }
     }
