@@ -15,13 +15,13 @@ class Portfolio extends VuexModule {
       }
       else{
           this.stocks.push({
-              id: order.stockId,
+              id: order.id,
               quantity: order.quantity,
-              price: order.stockPrice,
+              price: order.price,
               name: order.name
           })
       }
-      this.funds -= order.stockPrice * order.quantity;
+      this.funds -= order.price * order.quantity;
   }
 
   @Mutation
@@ -43,7 +43,6 @@ class Portfolio extends VuexModule {
 
   //Getters
   get stockPortfolio(): any {
-
           return this.stocks.map(stock => {
               const record = this.stocks.find(element => element.id == stock.id);
               return{

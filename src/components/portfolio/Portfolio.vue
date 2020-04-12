@@ -1,13 +1,13 @@
 <template>
     <div class="panel-container">
-        <app-stock :stock="stock" v-for="(stock, index) in stocks" :key="index">{{stock.name}}</app-stock> 
+        <app-stock :from="'portfolio'" :stock="stock" v-for="(stock, index) in stocks" :key="index">{{stock.name}}</app-stock> 
         <div v-if="+stocks.length < 1" class="">No Stocks to Sell</div>
     </div>
 </template>
 
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator'
-  import Stock from './Stock.vue'
+  import Stock from '../StockTemplate.vue'
 
   @Component({
     components: {
